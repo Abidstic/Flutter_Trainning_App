@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: customColor.AppColor.homePageBackground,
       body: Container(
         padding: const EdgeInsets.only(
-          top: 60,
+          top: 50,
           left: 30,
           right: 30,
         ),
@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
                 Text(
                   "Training",
                   style: TextStyle(
-                    fontSize: 30,
+                    fontSize: 23,
                     fontWeight: FontWeight.bold,
                     color: customColor.AppColor.homePageTitle,
                   ),
@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Icon(
                   Icons.arrow_back_ios_new,
-                  size: 20,
+                  size: 15,
                   color: customColor.AppColor.homePageIcons,
                 ),
                 const SizedBox(
@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Icon(
                   Icons.calendar_today_outlined,
-                  size: 20,
+                  size: 15,
                   color: customColor.AppColor.homePageIcons,
                 ),
                 const SizedBox(
@@ -52,19 +52,19 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Icon(
                   Icons.arrow_forward_ios,
-                  size: 20,
+                  size: 15,
                   color: customColor.AppColor.homePageIcons,
                 ),
               ],
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 25),
             Row(
               children: [
                 Text(
                   "Your Program",
                   style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
                     color: customColor.AppColor.homePageSubtitle,
                   ),
                 ),
@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage> {
                 Text(
                   "Details",
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 18,
                     fontWeight: FontWeight.w500,
                     color: customColor.AppColor.homePageDetail,
                   ),
@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Icon(
                   Icons.arrow_forward_outlined,
-                  size: 20,
+                  size: 15,
                   color: customColor.AppColor.homePageIcons,
                 ),
               ],
@@ -92,7 +92,7 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(height: 20),
             Container(
               width: MediaQuery.of(context).size.width,
-              height: 220,
+              height: 200,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
@@ -128,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                     Text(
                       "Next Workout",
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 13,
                         color: customColor.AppColor.homePageContainerTextSmall,
                       ),
                     ),
@@ -136,7 +136,7 @@ class _HomePageState extends State<HomePage> {
                     Text(
                       "Legs Toining",
                       style: TextStyle(
-                        fontSize: 25,
+                        fontSize: 20,
                         color: customColor.AppColor.homePageContainerTextBig,
                       ),
                     ),
@@ -144,11 +144,11 @@ class _HomePageState extends State<HomePage> {
                     Text(
                       "and Glutes Workout",
                       style: TextStyle(
-                        fontSize: 25,
+                        fontSize: 20,
                         color: customColor.AppColor.homePageContainerTextBig,
                       ),
                     ),
-                    const SizedBox(height: 25),
+                    const SizedBox(height: 20),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
@@ -156,7 +156,7 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             Icon(
                               Icons.timer,
-                              size: 20,
+                              size: 15,
                               color: customColor
                                   .AppColor.homePageContainerTextSmall,
                             ),
@@ -164,7 +164,7 @@ class _HomePageState extends State<HomePage> {
                             Text(
                               "60 min",
                               style: TextStyle(
-                                fontSize: 14,
+                                fontSize: 13,
                                 color: customColor
                                     .AppColor.homePageContainerTextSmall,
                               ),
@@ -174,7 +174,7 @@ class _HomePageState extends State<HomePage> {
                         Expanded(child: Container()),
                         Container(
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(60),
+                            borderRadius: BorderRadius.circular(50),
                             boxShadow: [
                               BoxShadow(
                                 color: customColor.AppColor.gradientFirst,
@@ -185,7 +185,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           child: Icon(
                             Icons.play_circle_fill,
-                            size: 60,
+                            size: 50,
                             color:
                                 customColor.AppColor.homePageContainerTextBig,
                           ),
@@ -194,6 +194,91 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
+              ),
+            ),
+            const SizedBox(height: 5),
+            Container(
+              height: 175,
+              width: MediaQuery.of(context).size.width,
+              child: Stack(
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    margin: const EdgeInsets.only(top: 25),
+                    height: 115,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      image: const DecorationImage(
+                        image: AssetImage("assets/card.jpg"),
+                        fit: BoxFit.fill,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 40,
+                          offset: const Offset(8, 10),
+                          color: customColor.AppColor.gradientSecond
+                              .withOpacity(0.3),
+                        ),
+                        BoxShadow(
+                          blurRadius: 10,
+                          offset: const Offset(-1, -5),
+                          color: customColor.AppColor.gradientSecond
+                              .withOpacity(0.3),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: 200,
+                    width: MediaQuery.of(context).size.width,
+                    margin: const EdgeInsets.only(
+                      right: 200,
+                      bottom: 40,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      image: const DecorationImage(
+                        image: AssetImage("assets/figure.png"),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: double.maxFinite,
+                    height: 100,
+                    margin: const EdgeInsets.only(
+                      left: 130,
+                      top: 45,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "You are doing great",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: customColor.AppColor.homePageDetail,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        RichText(
+                          text: TextSpan(
+                            text: "Keep it up\n",
+                            style: TextStyle(
+                              color: customColor.AppColor.homePagePlanColor,
+                              fontSize: 14,
+                            ),
+                            children: const [
+                              TextSpan(
+                                text: "stick to your plan",
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
