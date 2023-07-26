@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'color.dart' as customColor;
 
@@ -9,6 +11,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List info = [];
+  _initData() {
+    DefaultAssetBundle.of(context).loadString("json/info.json").then((value) {
+      info = json.decode(value);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _initData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -280,6 +295,67 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
+            ),
+            Row(
+              children: [
+                Text(
+                  "Area of Focus",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 23,
+                    fontWeight: FontWeight.w500,
+                    color: customColor.AppColor.homePageTitle,
+                  ),
+                ),
+              ],
+            ),
+            Expanded(
+              child: ListView.builder(
+                  itemCount: info.length,
+                  itemBuilder: (_, i) {
+                    return Row(
+                      children: [
+                        Container(
+                          height: 170,
+                          width: 200,
+                          padding: const EdgeInsets.only(bottom: 5),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15),
+                            image: DecorationImage(
+                              image: AssetImage(info[i]["img"]),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 3,
+                                offset: const Offset(5, 5),
+                                color: customColor.AppColor.gradientSecond
+                                    .withOpacity(0.1),
+                              ),
+                              BoxShadow(
+                                blurRadius: 3,
+                                offset: const Offset(-5, -5),
+                                color: customColor.AppColor.gradientSecond
+                                    .withOpacity(0.1),
+                              ),
+                            ],
+                          ),
+                          child: Center(
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Text(
+                                "Glues",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: customColor.AppColor.homePageTitle,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  }),
             ),
           ],
         ),
