@@ -11,10 +11,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List info = [];
+  List infos = [];
   _initData() {
     DefaultAssetBundle.of(context).loadString("json/info.json").then((value) {
-      info = json.decode(value);
+      infos = jsonDecode(value);
     });
   }
 
@@ -311,7 +311,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Expanded(
               child: ListView.builder(
-                  itemCount: info.length,
+                  itemCount: infos.length,
                   itemBuilder: (_, i) {
                     return Row(
                       children: [
@@ -323,7 +323,7 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(15),
                             image: DecorationImage(
-                              image: AssetImage(info[i]["img"]),
+                              image: AssetImage(infos[i]["img"]),
                             ),
                             boxShadow: [
                               BoxShadow(
@@ -344,7 +344,7 @@ class _HomePageState extends State<HomePage> {
                             child: Align(
                               alignment: Alignment.bottomCenter,
                               child: Text(
-                                "Glues",
+                                infos[i]["title"],
                                 style: TextStyle(
                                   fontSize: 20,
                                   color: customColor.AppColor.homePageTitle,
