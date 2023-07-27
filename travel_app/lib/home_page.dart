@@ -312,19 +312,27 @@ class _HomePageState extends State<HomePage> {
             Expanded(
               child: OverflowBox(
                 maxWidth: MediaQuery.of(context).size.width,
-                child: ListView.builder(
-                    itemCount: (infos.length.toDouble() / 2).toInt(),
-                    itemBuilder: (_, i) {
-                      int a = 2 * i;
-                      int b = 2 * i + 1;
+                child: MediaQuery.removePadding(
+                  removeTop: true,
+                  context: context,
+                  child: ListView.builder(
+                      itemCount: (infos.length.toDouble() / 2).toInt(),
+                      itemBuilder: (_, i) {
+                        int a = 2 * i;
+                        int b = 2 * i + 1;
 
-                      return Row(
-                        children: [
-                          Expanded(
-                            child: Container(
+                        return Row(
+                          children: [
+                            Container(
                               height: 170,
-                              width: 200,
+                              width:
+                                  (MediaQuery.of(context).size.width - 90) / 2,
                               padding: const EdgeInsets.only(bottom: 5),
+                              margin: const EdgeInsets.only(
+                                left: 30,
+                                bottom: 15,
+                                top: 15,
+                              ),
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(15),
@@ -336,13 +344,13 @@ class _HomePageState extends State<HomePage> {
                                     blurRadius: 3,
                                     offset: const Offset(5, 5),
                                     color: customColor.AppColor.gradientSecond
-                                        .withOpacity(0.1),
+                                        .withOpacity(0.2),
                                   ),
                                   BoxShadow(
                                     blurRadius: 3,
                                     offset: const Offset(-5, -5),
                                     color: customColor.AppColor.gradientSecond
-                                        .withOpacity(0.1),
+                                        .withOpacity(0.2),
                                   ),
                                 ],
                               ),
@@ -359,12 +367,16 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                             ),
-                          ),
-                          Expanded(
-                            child: Container(
+                            Container(
                               height: 170,
-                              width: 200,
+                              width:
+                                  (MediaQuery.of(context).size.width - 90) / 2,
                               padding: const EdgeInsets.only(bottom: 5),
+                              margin: const EdgeInsets.only(
+                                left: 30,
+                                bottom: 15,
+                                top: 15,
+                              ),
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(15),
@@ -376,13 +388,13 @@ class _HomePageState extends State<HomePage> {
                                     blurRadius: 3,
                                     offset: const Offset(5, 5),
                                     color: customColor.AppColor.gradientSecond
-                                        .withOpacity(0.1),
+                                        .withOpacity(0.2),
                                   ),
                                   BoxShadow(
                                     blurRadius: 3,
                                     offset: const Offset(-5, -5),
                                     color: customColor.AppColor.gradientSecond
-                                        .withOpacity(0.1),
+                                        .withOpacity(0.2),
                                   ),
                                 ],
                               ),
@@ -399,10 +411,10 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      );
-                    }),
+                          ],
+                        );
+                      }),
+                ),
               ),
             ),
           ],
