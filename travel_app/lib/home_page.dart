@@ -310,52 +310,100 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             Expanded(
-              child: ListView.builder(
-                  itemCount: infos.length,
-                  itemBuilder: (_, i) {
-                    return Row(
-                      children: [
-                        Container(
-                          height: 170,
-                          width: 200,
-                          padding: const EdgeInsets.only(bottom: 5),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(15),
-                            image: DecorationImage(
-                              image: AssetImage(infos[i]["img"]),
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                blurRadius: 3,
-                                offset: const Offset(5, 5),
-                                color: customColor.AppColor.gradientSecond
-                                    .withOpacity(0.1),
+              child: OverflowBox(
+                maxWidth: MediaQuery.of(context).size.width,
+                child: ListView.builder(
+                    itemCount: (infos.length.toDouble() / 2).toInt(),
+                    itemBuilder: (_, i) {
+                      int a = 2 * i;
+                      int b = 2 * i + 1;
+
+                      return Row(
+                        children: [
+                          Expanded(
+                            child: Container(
+                              height: 170,
+                              width: 200,
+                              padding: const EdgeInsets.only(bottom: 5),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(15),
+                                image: DecorationImage(
+                                  image: AssetImage(infos[a]["img"]),
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 3,
+                                    offset: const Offset(5, 5),
+                                    color: customColor.AppColor.gradientSecond
+                                        .withOpacity(0.1),
+                                  ),
+                                  BoxShadow(
+                                    blurRadius: 3,
+                                    offset: const Offset(-5, -5),
+                                    color: customColor.AppColor.gradientSecond
+                                        .withOpacity(0.1),
+                                  ),
+                                ],
                               ),
-                              BoxShadow(
-                                blurRadius: 3,
-                                offset: const Offset(-5, -5),
-                                color: customColor.AppColor.gradientSecond
-                                    .withOpacity(0.1),
-                              ),
-                            ],
-                          ),
-                          child: Center(
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Text(
-                                infos[i]["title"],
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: customColor.AppColor.homePageTitle,
+                              child: Center(
+                                child: Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: Text(
+                                    infos[a]["title"],
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      color: customColor.AppColor.homePageTitle,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    );
-                  }),
+                          Expanded(
+                            child: Container(
+                              height: 170,
+                              width: 200,
+                              padding: const EdgeInsets.only(bottom: 5),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(15),
+                                image: DecorationImage(
+                                  image: AssetImage(infos[b]["img"]),
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 3,
+                                    offset: const Offset(5, 5),
+                                    color: customColor.AppColor.gradientSecond
+                                        .withOpacity(0.1),
+                                  ),
+                                  BoxShadow(
+                                    blurRadius: 3,
+                                    offset: const Offset(-5, -5),
+                                    color: customColor.AppColor.gradientSecond
+                                        .withOpacity(0.1),
+                                  ),
+                                ],
+                              ),
+                              child: Center(
+                                child: Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: Text(
+                                    infos[b]["title"],
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      color: customColor.AppColor.homePageTitle,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    }),
+              ),
             ),
           ],
         ),
