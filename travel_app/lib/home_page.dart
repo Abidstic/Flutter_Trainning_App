@@ -1,6 +1,8 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:travel_app/video_info.dart';
 import 'color.dart' as customColor;
 
 class HomePage extends StatefulWidget {
@@ -97,10 +99,15 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   width: 5,
                 ),
-                Icon(
-                  Icons.arrow_forward_outlined,
-                  size: 15,
-                  color: customColor.AppColor.homePageIcons,
+                InkWell(
+                  onTap: () {
+                    Get.to(() => const VideoInfo());
+                  },
+                  child: Icon(
+                    Icons.arrow_forward_outlined,
+                    size: 15,
+                    color: customColor.AppColor.homePageIcons,
+                  ),
                 ),
               ],
             ),
