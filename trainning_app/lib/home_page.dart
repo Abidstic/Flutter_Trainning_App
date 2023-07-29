@@ -218,7 +218,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             const SizedBox(height: 5),
-            Container(
+            SizedBox(
               height: 175,
               width: MediaQuery.of(context).size.width,
               child: Stack(

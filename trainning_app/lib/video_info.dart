@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:video_player/video_player.dart';
 import 'color.dart' as Color;
 
 class VideoInfo extends StatefulWidget {
@@ -13,6 +14,7 @@ class VideoInfo extends StatefulWidget {
 class _VideoInfoState extends State<VideoInfo> {
   List videoInfos = [];
   bool _playArea = false;
+  late VideoPlayerController _controller;
   _initData() async {
     await DefaultAssetBundle.of(context).loadString("json/videoinfo.json").then(
       (value) {
@@ -193,9 +195,42 @@ class _VideoInfoState extends State<VideoInfo> {
                     ),
                   )
                 : Container(
-                    height: 300,
-                    width: 300,
-                    color: Colors.red,
+                    height: 100,
+                    padding: const EdgeInsets.only(
+                      top: 50,
+                      left: 30,
+                      right: 30,
+                    ),
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 100,
+                          child: Row(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  debugPrint("this button is tapped");
+                                },
+                                child: Icon(
+                                  Icons.arrow_back_ios_new_rounded,
+                                  size: 20,
+                                  color: Color.AppColor.secondPageIconColor,
+                                ),
+                              ),
+                              Expanded(
+                                child: Container(),
+                              ),
+                              Icon(
+                                Icons.info,
+                                size: 20,
+                                color: Color.AppColor.secondPageIconColor,
+                              ),
+                            ],
+                          ),
+                        ),
+                        _playView(context),
+                      ],
+                    ),
                   ),
             const SizedBox(
               height: 20,
@@ -270,6 +305,33 @@ class _VideoInfoState extends State<VideoInfo> {
     );
   }
 
+  Widget _playView(BuildContext context) {
+    final controller = _controller;
+    if (controller != null && controller.value.isInitialized) {
+      return SizedBox(
+        height: 300,
+        width: 300,
+        child: VideoPlayer(controller),
+      );
+    } else {
+      return const Text(
+        "Being Initialized",
+      );
+    }
+  }
+
+  _onTapVideo(int index) {
+    final controller = VideoPlayerController.networkUrl(
+        Uri.parse(videoInfos[index]["videoUrl"]));
+    _controller = controller;
+    setState(() {});
+    _controller
+      ..initialize().then((_) {
+        controller.play();
+        setState(() {});
+      });
+  }
+
   _listView() {
     return ListView.builder(
       padding: EdgeInsets.symmetric(
@@ -280,6 +342,7 @@ class _VideoInfoState extends State<VideoInfo> {
       itemBuilder: (_, int index) {
         return GestureDetector(
           onTap: () {
+            _onTapVideo(index);
             debugPrint(index.toString());
             setState(() {
               if (_playArea == false) {
