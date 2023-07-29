@@ -15,7 +15,9 @@ class _HomePageState extends State<HomePage> {
   List infos = [];
   _initData() {
     DefaultAssetBundle.of(context).loadString("json/info.json").then((value) {
-      infos = jsonDecode(value);
+      setState(() {
+        infos = jsonDecode(value);
+      });
     });
   }
 
