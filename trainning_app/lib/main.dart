@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: "Travel App", // name of the app
+      title: "Trainning", // name of the app
       debugShowCheckedModeBanner:
           false, //this is used to remove the debug banner on the test device
       theme: ThemeData(
