@@ -203,7 +203,7 @@ class _VideoInfoState extends State<VideoInfo> {
                     ),
                     child: Column(
                       children: [
-                        Container(
+                        SizedBox(
                           height: 100,
                           child: Row(
                             children: [
