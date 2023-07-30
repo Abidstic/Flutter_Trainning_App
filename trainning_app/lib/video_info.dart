@@ -14,7 +14,8 @@ class VideoInfo extends StatefulWidget {
 class _VideoInfoState extends State<VideoInfo> {
   List videoInfos = [];
   bool _playArea = false;
-  late VideoPlayerController _controller;
+  VideoPlayerController? _controller;
+  bool _isPlaying = false;
   _initData() async {
     await DefaultAssetBundle.of(context).loadString("json/videoinfo.json").then(
       (value) {
@@ -54,9 +55,10 @@ class _VideoInfoState extends State<VideoInfo> {
             _playArea == false
                 ? Container(
                     padding: const EdgeInsets.only(
-                      top: 70,
+                      top: 30,
                       left: 30,
                       right: 30,
+                      bottom: 30,
                     ),
                     width: MediaQuery.of(context).size.width,
                     height: 300,
@@ -195,15 +197,15 @@ class _VideoInfoState extends State<VideoInfo> {
                     ),
                   )
                 : Container(
-                    padding: const EdgeInsets.only(
-                      top: 50,
-                      left: 30,
-                      right: 30,
-                    ),
                     child: Column(
                       children: [
                         Container(
                           height: 100,
+                          padding: const EdgeInsets.only(
+                            left: 30,
+                            right: 30,
+                            top: 50,
+                          ),
                           child: Row(
                             children: [
                               InkWell(
@@ -228,12 +230,13 @@ class _VideoInfoState extends State<VideoInfo> {
                           ),
                         ),
                         _playView(context),
+                        _controlView(context),
                       ],
                     ),
                   ),
-            const SizedBox(
-              height: 20,
-            ),
+            // const SizedBox(
+            //   height: 20,
+            // ),
             Expanded(
               child: Container(
                 decoration: const BoxDecoration(
@@ -304,29 +307,105 @@ class _VideoInfoState extends State<VideoInfo> {
     );
   }
 
+  Widget _controlView(BuildContext context) {
+    return Container(
+      height: 120,
+      width: MediaQuery.of(context).size.width,
+      color: Color.AppColor.gradientSecond,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          FloatingActionButton(
+            onPressed: () async {},
+            child: const Icon(
+              Icons.fast_rewind_outlined,
+              size: 36,
+              color: Colors.white,
+            ),
+          ),
+          FloatingActionButton(
+            onPressed: () async {
+              if (_isPlaying) {
+                setState(() {
+                  _isPlaying = false;
+                });
+                _controller?.pause();
+              } else {
+                setState(() {
+                  _isPlaying = true;
+                });
+                _controller?.play();
+              }
+            },
+            child: Icon(
+              _isPlaying
+                  ? Icons.pause_circle_outline
+                  : Icons.play_circle_outline_outlined,
+              size: 36,
+              color: Colors.white,
+            ),
+          ),
+          FloatingActionButton(
+            onPressed: () async {},
+            child: const Icon(
+              Icons.fast_forward_outlined,
+              size: 36,
+              color: Colors.white,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _playView(BuildContext context) {
     final controller = _controller;
     if (controller != null && controller.value.isInitialized) {
-      return Container(
-        height: 300,
-        width: 300,
+      return AspectRatio(
+        aspectRatio: controller.value.aspectRatio,
         child: VideoPlayer(controller),
       );
     } else {
-      return const Text(
-        "Being Initialized",
+      return const AspectRatio(
+        aspectRatio: 16 / 9,
+        child: Center(
+          child: Text(
+            "Prepairing...",
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w500,
+              color: Colors.white60,
+            ),
+          ),
+        ),
       );
     }
   }
 
-  _onTapVideo(int index) {
+  void _onControllerUpdate() async {
+    final controller = _controller;
+    if (controller == null) {
+      debugPrint("controller is null");
+      return;
+    }
+    if (!controller.value.isInitialized) {
+      debugPrint("controller is not initialized");
+      return;
+    }
+    final playing = controller.value.isPlaying;
+    _isPlaying = playing;
+  }
+
+  _onTapVideo(int index) async {
     final controller = VideoPlayerController.networkUrl(
         Uri.parse(videoInfos[index]["videoUrl"]));
     _controller = controller;
+
     setState(() {});
-    _controller
-      ..initialize().then((_) {
-        controller.play();
+    controller
+      ?..initialize().then((_) {
+        controller.addListener(_onControllerUpdate);
+        controller?.play();
         setState(() {});
       });
   }
