@@ -195,7 +195,6 @@ class _VideoInfoState extends State<VideoInfo> {
                     ),
                   )
                 : Container(
-                    height: 100,
                     padding: const EdgeInsets.only(
                       top: 50,
                       left: 30,
@@ -203,7 +202,7 @@ class _VideoInfoState extends State<VideoInfo> {
                     ),
                     child: Column(
                       children: [
-                        SizedBox(
+                        Container(
                           height: 100,
                           child: Row(
                             children: [
@@ -308,7 +307,7 @@ class _VideoInfoState extends State<VideoInfo> {
   Widget _playView(BuildContext context) {
     final controller = _controller;
     if (controller != null && controller.value.isInitialized) {
-      return SizedBox(
+      return Container(
         height: 300,
         width: 300,
         child: VideoPlayer(controller),
@@ -359,7 +358,7 @@ class _VideoInfoState extends State<VideoInfo> {
   }
 
   _buildCard(int index) {
-    return SizedBox(
+    return Container(
       height: 135,
       child: Column(
         children: [
