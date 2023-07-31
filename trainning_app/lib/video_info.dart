@@ -16,6 +16,8 @@ class _VideoInfoState extends State<VideoInfo> {
   bool _playArea = false;
   VideoPlayerController? _controller;
   bool _isPlaying = false;
+  bool _disposed = false;
+  int _isPlayingIndex = -1;
   _initData() async {
     await DefaultAssetBundle.of(context).loadString("json/videoinfo.json").then(
       (value) {
@@ -30,6 +32,15 @@ class _VideoInfoState extends State<VideoInfo> {
   void initState() {
     super.initState();
     _initData();
+  }
+
+  @override
+  void dispose() {
+    _disposed = true;
+    _controller?.pause();
+    _controller?.dispose();
+    _controller = null;
+    super.dispose();
   }
 
   @override
@@ -315,8 +326,16 @@ class _VideoInfoState extends State<VideoInfo> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          
           FloatingActionButton(
-            onPressed: () async {},
+            onPressed: () async {
+              final index = _isPlayingIndex - 1;
+              if (index >= 0 && videoInfos.length >= 0) {
+                _initializeVideo(index);
+              } else {
+                Get.snackbar("Video", "No more Video TO play");
+              }
+            },
             child: const Icon(
               Icons.fast_rewind_outlined,
               size: 36,
@@ -346,7 +365,14 @@ class _VideoInfoState extends State<VideoInfo> {
             ),
           ),
           FloatingActionButton(
-            onPressed: () async {},
+            onPressed: () async {
+              final index = _isPlayingIndex + 1;
+              if (index <= videoInfos.length - 1) {
+                _initializeVideo(index);
+              } else {
+                Get.snackbar("Video", "No More Videos In The List");
+              }
+            },
             child: const Icon(
               Icons.fast_forward_outlined,
               size: 36,
@@ -382,7 +408,20 @@ class _VideoInfoState extends State<VideoInfo> {
     }
   }
 
+  var _onUpdateController;
+
   void _onControllerUpdate() async {
+    if (_disposed) {
+      return;
+    }
+    _onUpdateController = 0;
+
+    final now = DateTime.now().millisecondsSinceEpoch;
+    if (_onUpdateController > now) {
+      return;
+    }
+    _onUpdateController = now + 500;
+
     final controller = _controller;
     if (controller == null) {
       debugPrint("controller is null");
@@ -396,14 +435,22 @@ class _VideoInfoState extends State<VideoInfo> {
     _isPlaying = playing;
   }
 
-  _onTapVideo(int index) async {
+  _initializeVideo(int index) async {
     final controller = VideoPlayerController.networkUrl(
         Uri.parse(videoInfos[index]["videoUrl"]));
+    final oldController = _controller;
     _controller = controller;
+    if (oldController != null) {
+      oldController.removeListener(_onControllerUpdate);
+      oldController.pause();
+    }
 
     setState(() {});
+
     controller
       ?..initialize().then((_) {
+        oldController?.dispose();
+        _isPlayingIndex = index;
         controller.addListener(_onControllerUpdate);
         controller?.play();
         setState(() {});
@@ -420,7 +467,7 @@ class _VideoInfoState extends State<VideoInfo> {
       itemBuilder: (_, int index) {
         return GestureDetector(
           onTap: () {
-            _onTapVideo(index);
+            _initializeVideo(index);
             debugPrint(index.toString());
             setState(() {
               if (_playArea == false) {
