@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
-import 'color.dart' as Color;
+import 'color.dart' as CustomColor;
 
 class VideoInfo extends StatefulWidget {
   const VideoInfo({super.key});
@@ -51,15 +51,15 @@ class _VideoInfoState extends State<VideoInfo> {
             ? BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
-                    Color.AppColor.gradientFirst.withOpacity(0.8),
-                    Color.AppColor.gradientSecond,
+                    CustomColor.AppColor.gradientFirst.withOpacity(0.8),
+                    CustomColor.AppColor.gradientSecond,
                   ],
                   begin: const FractionalOffset(0.0, 0.4),
                   end: Alignment.topRight,
                 ),
               )
             : BoxDecoration(
-                color: Color.AppColor.gradientSecond,
+                color: CustomColor.AppColor.gradientSecond,
               ),
         child: Column(
           children: [
@@ -85,14 +85,14 @@ class _VideoInfoState extends State<VideoInfo> {
                               child: Icon(
                                 Icons.arrow_back_ios_rounded,
                                 size: 20,
-                                color: Color.AppColor.secondPageIconColor,
+                                color: CustomColor.AppColor.secondPageIconColor,
                               ),
                             ),
                             Expanded(child: Container()),
                             Icon(
                               Icons.info_outline_rounded,
                               size: 20,
-                              color: Color.AppColor.secondPageIconColor,
+                              color: CustomColor.AppColor.secondPageIconColor,
                             ),
                           ],
                         ),
@@ -104,7 +104,7 @@ class _VideoInfoState extends State<VideoInfo> {
                           style: TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.w400,
-                            color: Color.AppColor.secondPageTitleColor,
+                            color: CustomColor.AppColor.secondPageTitleColor,
                           ),
                         ),
                         const SizedBox(
@@ -115,7 +115,7 @@ class _VideoInfoState extends State<VideoInfo> {
                           style: TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.w400,
-                            color: Color.AppColor.secondPageTitleColor,
+                            color: CustomColor.AppColor.secondPageTitleColor,
                           ),
                         ),
                         const SizedBox(
@@ -129,9 +129,9 @@ class _VideoInfoState extends State<VideoInfo> {
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
                                   colors: [
-                                    Color.AppColor
+                                    CustomColor.AppColor
                                         .secondPageContainerGradient1stColor,
-                                    Color.AppColor
+                                    CustomColor.AppColor
                                         .secondPageContainerGradient2ndColor,
                                   ],
                                   begin: Alignment.bottomLeft,
@@ -145,7 +145,7 @@ class _VideoInfoState extends State<VideoInfo> {
                                   Icon(
                                     Icons.timer_outlined,
                                     size: 20,
-                                    color: Color
+                                    color: CustomColor
                                         .AppColor.homePageContainerTextSmall,
                                   ),
                                   const SizedBox(width: 5),
@@ -153,7 +153,7 @@ class _VideoInfoState extends State<VideoInfo> {
                                     "60 min",
                                     style: TextStyle(
                                       fontSize: 16,
-                                      color: Color
+                                      color: CustomColor
                                           .AppColor.homePageContainerTextSmall,
                                     ),
                                   ),
@@ -170,9 +170,9 @@ class _VideoInfoState extends State<VideoInfo> {
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
                                     colors: [
-                                      Color.AppColor
+                                      CustomColor.AppColor
                                           .secondPageContainerGradient1stColor,
-                                      Color.AppColor
+                                      CustomColor.AppColor
                                           .secondPageContainerGradient2ndColor,
                                     ],
                                     begin: Alignment.bottomLeft,
@@ -186,7 +186,7 @@ class _VideoInfoState extends State<VideoInfo> {
                                     Icon(
                                       Icons.handyman_rounded,
                                       size: 20,
-                                      color: Color
+                                      color: CustomColor
                                           .AppColor.homePageContainerTextSmall,
                                     ),
                                     const SizedBox(width: 5),
@@ -194,7 +194,7 @@ class _VideoInfoState extends State<VideoInfo> {
                                       "Resistant band, Kettle",
                                       style: TextStyle(
                                         fontSize: 16,
-                                        color: Color.AppColor
+                                        color: CustomColor.AppColor
                                             .homePageContainerTextSmall,
                                       ),
                                     ),
@@ -226,7 +226,8 @@ class _VideoInfoState extends State<VideoInfo> {
                                 child: Icon(
                                   Icons.arrow_back_ios_new_rounded,
                                   size: 20,
-                                  color: Color.AppColor.secondPageIconColor,
+                                  color:
+                                      CustomColor.AppColor.secondPageIconColor,
                                 ),
                               ),
                               Expanded(
@@ -235,7 +236,7 @@ class _VideoInfoState extends State<VideoInfo> {
                               Icon(
                                 Icons.info,
                                 size: 20,
-                                color: Color.AppColor.secondPageIconColor,
+                                color: CustomColor.AppColor.secondPageIconColor,
                               ),
                             ],
                           ),
@@ -271,7 +272,7 @@ class _VideoInfoState extends State<VideoInfo> {
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: Color.AppColor.circuitsColor,
+                            color: CustomColor.AppColor.circuitsColor,
                           ),
                         ),
                         Expanded(
@@ -282,7 +283,7 @@ class _VideoInfoState extends State<VideoInfo> {
                             Icon(
                               Icons.loop,
                               size: 30,
-                              color: Color.AppColor.loopColor,
+                              color: CustomColor.AppColor.loopColor,
                             ),
                             const SizedBox(
                               width: 10,
@@ -292,7 +293,7 @@ class _VideoInfoState extends State<VideoInfo> {
                               style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w300,
-                                color: Color.AppColor.setsColor,
+                                color: CustomColor.AppColor.setsColor,
                               ),
                             )
                           ],
@@ -322,11 +323,32 @@ class _VideoInfoState extends State<VideoInfo> {
     return Container(
       height: 120,
       width: MediaQuery.of(context).size.width,
-      color: Color.AppColor.gradientSecond,
+      color: CustomColor.AppColor.gradientSecond,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          FloatingActionButton(
+          InkWell(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              child: Container(
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(0.0, 0.0),
+                      blurRadius: 4.0,
+                      color: Color.fromARGB(50, 0, 0, 0),
+                    ),
+                  ],
+                ),
+                child: const Icon(
+                  Icons.volume_up,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+          TextButton(
             onPressed: () async {
               final index = _isPlayingIndex - 1;
               if (index >= 0 && videoInfos.length >= 0) {
@@ -341,7 +363,7 @@ class _VideoInfoState extends State<VideoInfo> {
                     size: 30,
                     color: Colors.red,
                   ),
-                  backgroundColor: Color.AppColor.gradientSecond,
+                  backgroundColor: CustomColor.AppColor.gradientSecond,
                   colorText: Colors.white,
                   messageText: const Text(
                     "No more videos ahead !",
@@ -359,7 +381,7 @@ class _VideoInfoState extends State<VideoInfo> {
               color: Colors.white,
             ),
           ),
-          FloatingActionButton(
+          TextButton(
             onPressed: () async {
               if (_isPlaying) {
                 setState(() {
@@ -381,7 +403,7 @@ class _VideoInfoState extends State<VideoInfo> {
               color: Colors.white,
             ),
           ),
-          FloatingActionButton(
+          TextButton(
             onPressed: () async {
               final index = _isPlayingIndex + 1;
               if (index <= videoInfos.length - 1) {
@@ -396,7 +418,7 @@ class _VideoInfoState extends State<VideoInfo> {
                     size: 30,
                     color: Colors.red,
                   ),
-                  backgroundColor: Color.AppColor.gradientSecond,
+                  backgroundColor: CustomColor.AppColor.gradientSecond,
                   colorText: Colors.white,
                   messageText: const Text(
                     "No more videos behind !",
