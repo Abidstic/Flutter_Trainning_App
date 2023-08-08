@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:travel_app/home_page.dart';
 import 'video_info.dart';
 
 void main() {
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
       ),
       //here we have selected a color scheme
-      home: const VideoInfo(),
+      home: const HomePage(),
     );
   }
 }

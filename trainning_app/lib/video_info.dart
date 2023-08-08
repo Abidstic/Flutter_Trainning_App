@@ -208,45 +208,43 @@ class _VideoInfoState extends State<VideoInfo> {
                       ],
                     ),
                   )
-                : Container(
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 100,
-                          padding: const EdgeInsets.only(
-                            left: 30,
-                            right: 30,
-                            top: 50,
+                : Column(
+                  children: [
+                    Container(
+                      height: 100,
+                      padding: const EdgeInsets.only(
+                        left: 30,
+                        right: 30,
+                        top: 50,
+                      ),
+                      child: Row(
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              Get.back();
+                            },
+                            child: Icon(
+                              Icons.arrow_back_ios_new_rounded,
+                              size: 20,
+                              color:
+                                  CustomColor.AppColor.secondPageIconColor,
+                            ),
                           ),
-                          child: Row(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  debugPrint("this button is tapped");
-                                },
-                                child: Icon(
-                                  Icons.arrow_back_ios_new_rounded,
-                                  size: 20,
-                                  color:
-                                      CustomColor.AppColor.secondPageIconColor,
-                                ),
-                              ),
-                              Expanded(
-                                child: Container(),
-                              ),
-                              Icon(
-                                Icons.info,
-                                size: 20,
-                                color: CustomColor.AppColor.secondPageIconColor,
-                              ),
-                            ],
+                          Expanded(
+                            child: Container(),
                           ),
-                        ),
-                        _playView(context),
-                        _controlView(context),
-                      ],
+                          Icon(
+                            Icons.info,
+                            size: 20,
+                            color: CustomColor.AppColor.secondPageIconColor,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
+                    _playView(context),
+                    _controlView(context),
+                  ],
+                ),
             // const SizedBox(
             //   height: 20,
             // ),
@@ -338,18 +336,18 @@ class _VideoInfoState extends State<VideoInfo> {
           data: SliderTheme.of(context).copyWith(
             activeTrackColor: Colors.red[700],
             inactiveTrackColor: Colors.red[100],
-            trackShape: RoundedRectSliderTrackShape(),
+            trackShape: const RoundedRectSliderTrackShape(),
             trackHeight: 2.0,
-            thumbShape: RoundSliderThumbShape(enabledThumbRadius: 12.0),
+            thumbShape:const  RoundSliderThumbShape(enabledThumbRadius: 12.0),
             thumbColor: Colors.redAccent,
             overlayColor: Colors.red.withAlpha(32),
-            overlayShape: RoundSliderOverlayShape(overlayRadius: 28.0),
-            tickMarkShape: RoundSliderTickMarkShape(),
+            overlayShape:const RoundSliderOverlayShape(overlayRadius: 28.0),
+            tickMarkShape: const RoundSliderTickMarkShape(),
             activeTickMarkColor: Colors.red[700],
             inactiveTickMarkColor: Colors.red[100],
-            valueIndicatorShape: PaddleSliderValueIndicatorShape(),
+            valueIndicatorShape:const PaddleSliderValueIndicatorShape(),
             valueIndicatorColor: Colors.redAccent,
-            valueIndicatorTextStyle: TextStyle(
+            valueIndicatorTextStyle: const TextStyle(
               color: Colors.white,
             ),
           ),
