@@ -326,14 +326,31 @@ class _VideoInfoState extends State<VideoInfo> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          
           FloatingActionButton(
             onPressed: () async {
               final index = _isPlayingIndex - 1;
               if (index >= 0 && videoInfos.length >= 0) {
                 _initializeVideo(index);
               } else {
-                Get.snackbar("Video", "No more Video TO play");
+                Get.snackbar(
+                  "Video",
+                  "",
+                  snackPosition: SnackPosition.BOTTOM,
+                  icon: const Icon(
+                    Icons.dangerous_outlined,
+                    size: 30,
+                    color: Colors.red,
+                  ),
+                  backgroundColor: Color.AppColor.gradientSecond,
+                  colorText: Colors.white,
+                  messageText: const Text(
+                    "No more videos ahead !",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                );
               }
             },
             child: const Icon(
@@ -370,7 +387,25 @@ class _VideoInfoState extends State<VideoInfo> {
               if (index <= videoInfos.length - 1) {
                 _initializeVideo(index);
               } else {
-                Get.snackbar("Video", "No More Videos In The List");
+                Get.snackbar(
+                  "Video",
+                  "",
+                  snackPosition: SnackPosition.BOTTOM,
+                  icon: const Icon(
+                    Icons.dangerous_outlined,
+                    size: 30,
+                    color: Colors.red,
+                  ),
+                  backgroundColor: Color.AppColor.gradientSecond,
+                  colorText: Colors.white,
+                  messageText: const Text(
+                    "No more videos behind !",
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                );
               }
             },
             child: const Icon(
