@@ -320,6 +320,7 @@ class _VideoInfoState extends State<VideoInfo> {
   }
 
   Widget _controlView(BuildContext context) {
+    final noMute = (_controller?.value?.volume ?? 0) > 0;
     return Container(
       height: 120,
       width: MediaQuery.of(context).size.width,
@@ -341,12 +342,20 @@ class _VideoInfoState extends State<VideoInfo> {
                     ),
                   ],
                 ),
-                child: const Icon(
-                  Icons.volume_up,
+                child: Icon(
+                  noMute ? Icons.volume_up : Icons.volume_off,
                   color: Colors.white,
                 ),
               ),
             ),
+            onTap: () {
+              if (noMute) {
+                _controller?.setVolume(0);
+              } else {
+                _controller?.setVolume(1.0);
+              }
+              setState(() {});
+            },
           ),
           TextButton(
             onPressed: () async {
@@ -504,12 +513,13 @@ class _VideoInfoState extends State<VideoInfo> {
 
     setState(() {});
 
+    // ignore: avoid_single_cascade_in_expression_statements
     controller
-      ?..initialize().then((_) {
+      ..initialize().then((_) {
         oldController?.dispose();
         _isPlayingIndex = index;
         controller.addListener(_onControllerUpdate);
-        controller?.play();
+        controller.play();
         setState(() {});
       });
   }
